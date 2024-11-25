@@ -11,6 +11,7 @@ Can be decimals -1.5 or expressions like 1/3 or math.nan, math.inf etc.
 """
 
 import math
+import platform
 import struct  # https://docs.python.org/3.13/library/struct.html
 import sys
 
@@ -20,6 +21,7 @@ MANTISSA_MASK = eval('0b' + '0' * 12 + '1' * 52)   # 52 mantissa bits
 DIV = 1 << 52       # 52 mantissa bits
 EXP_OFFSET = 0x3ff  # 1023 = 2^{10} - 1 (11 mantissa bits)
 EXP_MAX = 0x7ff     # Used for NaNs and Infinities
+INFINITY = 'inf' if platform.system() == 'Windows' else '∞'
 
 class IEEE64f:
     """
@@ -45,7 +47,7 @@ class IEEE64f:
         self.exponent = self.exponent_raw - 1023  # exponent is offset
         if self.exponent_raw == 0x7ff:
             if self.mantissa_raw == 0:  # indicates infinity
-                self.out_val = f'{self.sgn}∞'
+                self.out_val = f'{self.sgn}{INFINITY}'
             else:
                 self.out_val = 'NaN'  # qNaN vs. sNaN is machine dependent
         else:

@@ -16,7 +16,7 @@ import struct
 import sys
 import unittest
 
-from ieee64 import IEEE64f
+from ieee64 import IEEE64f, INFINITY
 
 TEST_EXPRESSIONS = [
     0,
@@ -50,8 +50,8 @@ MINUS_ZERO = np.float64(0) * np.float64(-1.0)
 
 EQUIVS = {
     'nan': 'NaN',
-    'inf': '+∞',
-    '-inf': '–∞',
+    'inf': f'+{INFINITY}',
+    '-inf': f'–{INFINITY}',
 }
 
 
