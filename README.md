@@ -21,4 +21,6 @@ Tested on:
     - Python 3.11.5, numpy 1.25.2
     - Python 3.6.8, numpy 1.19.5
 
+  - Mac M3 Pro
+    - Python 3.11.9, numpy 2.1.3
 
